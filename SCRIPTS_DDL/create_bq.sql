@@ -1,0 +1,57 @@
+CREATE SCHEMA IF NOT EXISTS OMNI_MANAGEMENT;
+
+CREATE OR REPLACE TABLE OMNI_MANAGEMENT.customers (
+    customer_id INT64 NOT NULL,
+    name STRING,
+    date_birth DATE,
+    email_address STRING,
+    phone_number STRING,
+    country STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) OPTIONS (
+    description="Tabela de clientes"
+);
+
+CREATE OR REPLACE TABLE OMNI_MANAGEMENT.products (
+    product_sku INT64 NOT NULL,
+    product_name STRING,
+    unit_price FLOAT64,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) OPTIONS (
+    description="Tabela de produtos"
+);
+
+CREATE OR REPLACE TABLE OMNI_MANAGEMENT.channels (
+    channel_id INT64 NOT NULL,
+    channel_name STRING,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) OPTIONS (
+    description="Tabela de canais"
+);
+
+CREATE OR REPLACE TABLE OMNI_MANAGEMENT.purchaseHistory (
+    customer_id INT64,
+    product_sku INT64,
+    channel_id INT64,
+    quantity INT64,
+    discount FLOAT64 DEFAULT 0,
+    order_date TIMESTAMP NOT NULL,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) OPTIONS (
+    description="Histórico de compras"
+);
+
+CREATE OR REPLACE TABLE OMNI_MANAGEMENT.visitHistory (
+    customer_id INT64,
+    channel_id INT64,
+    visit_timestamp TIMESTAMP NOT NULL,
+    bounce_timestamp TIMESTAMP,
+    CREATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UPDATED_AT TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) OPTIONS (
+    description="Histórico de visitas"
+);
